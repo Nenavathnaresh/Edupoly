@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Flexbox layout</title>
+    <style>
+       .flex{
+        display: flex;
+        list-style-type: none;
+        background-color: blue;
+        color: white;
+        margin: -2px;
+
+       }
+       .last{
+        margin-left: auto;
+       }
+       .container{
+        border: 2px solid;
+        display: flex;
+        justify-content: end;
+        height: 500px;
+        align-items: center;
+        
+       }
+       h1{
+        border: 2px solid;
+        padding: 10px;
+        height: 100px;
+        width: 200px;
+        margin: 10px;
+       }
+    </style>
+</head>
+<body>
+    <div>
+        <ul class="flex">
+            <li class="first"><i class="ri-mail-line"></i>nenvathnaresh460@gmail.com</li>
+            <li><i class="ri-smartphone-line"></i> +918184829256</li>
+            <li class="last"><i class="ri-twitter-line"></i></li>
+            <li><i class="ri-facebook-circle-line"></i></li>
+        </ul>
+    </div>
+        <div class="container">
+            <h1>Naresh</h1>
+            <h1>suresh</h1>
+            <h1>Ramesh</h1>
+        </div>
+</body>
+</html>
