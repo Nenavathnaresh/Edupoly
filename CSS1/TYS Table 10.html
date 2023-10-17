@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nth child table</title>
+    <style>
+        table{
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+        tr,td{
+            border: 1px dashed;  
+            
+        }
+        tr:nth-child(odd){
+            background-color: orangered;
+        }
+        tr:first-child{
+            background-color: olive;
+        }
+    </style>
+</head>
+<body>
+    <table id="a">
+        <tr>
+            <td>Location</td>
+            <td>Date</td>
+            <td>Distance to London</td>
+            <td>Highlight</td>
+            <td>Transporation</td>
+        </tr>
+        <tr>
+            <td>London</td>
+            <td>June 22, 2011</td>
+            <td>N/A</td>
+            <td>St.James Palace</td>
+            <td>Walking tour</td>
+        </tr>
+        <tr>
+            <td>Chawton</td>
+            <td>June 23, 2011</td>
+            <td>52 miles</td>
+            <td>Jane Ausren House</td>
+            <td>Bus tour</td>
+        </tr>
+        <tr>
+            <td>London</td>
+            <td>June 24, 2011</td>
+            <td>N/A</td>
+            <td>Tower of London</td>
+            <td>Walking tour</td>
+        </tr>
+        <tr>
+            <td>Winchesteer</td>
+            <td>June 23, 2011</td>
+            <td>68 miles</td>
+            <td>Winchesteer Cathedral</td>
+            <td>bus tour</td>
+        </tr>
+        <tr>
+            <td>Salishburry Plain</td>
+            <td>June 26, 2011</td>
+            <td>88 miles</td>
+            <td>Stonehenge</td>
+            <td>bus tour</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Bath</td>
+            <td rowspan="2">June 26, 2011</td>
+            <td rowspan="2">115 miles</td>
+            <td>Roman Baths</td>
+            <td>bus tour</td>
+        </tr>
+        <tr>
+            <td>Bath Cathedral</td>
+            <td>bus tour</td>
+        </tr>
+        <tr>
+            <td>Stratford-Upon-Avon</td>
+            <td>June 26, 2011</td>
+            <td>100 mile</td>
+            <td>Shakespeares House</td>
+            <td>bus tour</td>
+        </tr>
+        <tr>
+            <td rowspan="3">London</td>
+            <td>June 27, 2011</td>
+            <td>N/A</td>
+            <td>Globe Theatre</td>
+            <td>walking tour</td>
+        </tr>
+        <tr>
+            <td rowspan="2">June 28, 2011</td>
+            <td rowspan="2">N/A</td>
+            <td>Dicken's Landmark</td>
+            <td>bus tour</td>
+        </tr>
+        <tr>
+            <td>British Museum</td>
+            <td>walking tour</td>
+        </tr>
+        <tr>
+            <td>Windsor</td>
+            <td>June 30, 2011</td>
+            <td>22 miles</td>
+            <td>Windsor Castle</td>
+            <td>train</td>
+        </tr>
+        <tr>
+            <td>Edinburgh</td>
+            <td>July 1, 2011</td>
+            <td>413miles</td>
+            <td>Edenburge Castle</td>
+            <td>train</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Highlands</td>
+            <td rowspan="2">July 2, 2011</td>
+            <td rowspan="2">173 miles</td>
+            <td>Urquhart Castle</td>
+            <td>bus tour</td>
+        </tr>
+        <tr>
+            <td>Loch Ness</td>
+            <td>
+                <table>
+                    <tr>
+                        <td><b>To Loch Ness:</b></td>
+                        <td>bus</td>
+                    </tr>
+                    <tr>
+                        <td><b>From Loch Ness:</b></td>
+                        <td>boat</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
