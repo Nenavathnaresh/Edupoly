@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <script>
-        var n = prompt();
-        
-        for (; n > 0;) {
-            var digit = n % 10;
-            if (digit % 2 == 0) {
-                console.log(digit)
+        for(var i = 5; i >= 1; i--){
+            for(var j = 5; j >= i; j--){
+                document.write(i);
             }
-           
-            n = parseInt(n / 10);
-
+            document.write('<br>')
         }
-
-
     </script>
 </body>
-
 </html>

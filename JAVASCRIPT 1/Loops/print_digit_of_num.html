@@ -9,9 +9,9 @@
 
 <body>
     <script>
-        var n = prompt();
-        var len = n.length
-        for (var i = 1; i <= len; i++) {
+        var n = +prompt();
+        
+        for (; n > 0;) {
             digit = n % 10;
             console.log(digit)
             n = parseInt(n / 10);

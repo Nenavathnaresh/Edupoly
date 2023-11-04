@@ -41,14 +41,29 @@
             
             
         }
+        console.log('')
+
+
         for(var i in marks)
         {
             console.log(i)
         }
+        console.log('')
+
+        var count=0;
         for(var i in marks)
         {
-            console.log(Object.keys(marks).length)
+            count += 1
+            
         }
+        console.log(count);
+        console.log('')
+        var sum = 0;
+        for(var i in marks){
+            sum += marks[i];
+        }
+        var persent = sum / 500 * (100);
+        console.log(persent);
 
         console.log('')
         for(var i in marks){
@@ -74,10 +89,70 @@
             
         }
         console.log('')
+
+
+        count = 0;
         for(var i in marks){
-            console.log('')
-            console.log(i,marks[i])
+            if(marks[i] > 35){
+                count += 1;
+            }
         }
+        console.log(count);
+        console.log('');
+
+        for(var i in marks){
+            if(marks[i] < 35){
+                console.log(i)
+            }
+        }
+        console.log('')
+
+        count = 0;
+        for(var i in marks){
+            if(marks[i] < 35){
+                count += 1;
+            }
+        }
+        console.log(count)
+        console.log('')
+
+        var min = marks['maths'];
+        for(var i in marks){
+            if(marks[i] < min){
+                min = marks[i];
+            }
+        }
+        console.log(min);
+        console.log('');
+
+        var max = marks['maths'];
+        for(var i in marks){
+            if(marks[i] > max){
+                max = marks[i];
+            }
+        }
+        console.log(max);
+        console.log('');
+
+        for(var i in marks){
+            if(marks[i] > 35){
+                console.log(i, 'passed')
+            }
+            else{
+                console.log(i, 'fail')
+            }
+        }
+        console.log('');
+
+        var sub = prompt();
+        //for(var i in marks){
+            if(marks[sub] > 35){
+                console.log(marks[sub], 'pass')
+            }
+            else{
+                console.log(marks[sub], 'fail')
+            }
+        //}
     </script>
 </body>
 </html>

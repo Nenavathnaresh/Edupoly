@@ -9,8 +9,13 @@
     <script>
         var n = +prompt();
         var r = +prompt();
-        var power = n ** r ;
-        console.log(power);
+        product = 1 ;
+        var i = 1;
+        while(i <= r){
+            product = product * n ;
+            i++;
+        }
+        console.log(product)
     </script>
 </body>
 </html>
