@@ -6,9 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="demo">This is Suresh</p>
     <script>
-        document.getElementById('demo').innerHTML = 'Hii Naresh';
+        var str = prompt();
+        for(var i = 0; i < str.length-1; i++){
+            
+                if(str[i] !==str[i+1])
+                console.log(str[i])
+        }
     </script>
 </body>
 </html>

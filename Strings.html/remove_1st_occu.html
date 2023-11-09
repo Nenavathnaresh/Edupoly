@@ -8,18 +8,13 @@
 <body>
     <script>
         var str = prompt();
-        var count = 0;
         for(var i = 0; i < str.length; i++){
             if(str[i] === 'a'){
-                count += 1
+                var ind = i;
+                break;
             }
         }
-        console.log(count)
-
-        // or
-        
-        var a = str.split('a').length-1;
-        console.log(a)
+        console.log(str.slice(0,ind) + str.slice(ind+1))
     </script>
 </body>
 </html>

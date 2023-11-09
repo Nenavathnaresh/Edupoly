@@ -6,9 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="demo">This is Suresh</p>
     <script>
-        document.getElementById('demo').innerHTML = 'Hii Naresh';
+        var str = prompt();
+        for(var i = 0; i < str.length; i++){
+            if(str[i] === 'a'){
+                var a = i;
+            }
+        }
+        console.log(str.slice(0,a) + str.slice(a+1));
     </script>
 </body>
 </html>
