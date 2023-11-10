@@ -6,9 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="demo">This is Suresh</p>
-    <script>
-        document.getElementById('demo').innerHTML = 'Hii Naresh';
-    </script>
+   <script>
+    var str = prompt();
+    var ind;
+    for(var i = 0; i < str.length; i++){
+        var len =(str.split(str[i]).length-1);
+        if(len === 1){
+            ind = i;
+            break;
+        }
+    }
+    if(len === 1){
+        console.log(ind);
+    }
+    else {
+        console.log(-1)
+    }
+   
+
+   </script>
 </body>
 </html>

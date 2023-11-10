@@ -8,15 +8,15 @@
 <body>
     <script>
         var str = prompt();
-        var k = str.split('a');
-        var n = k.join('');
-        console.log(n);
-
-        for(var i = 0; i < str.lenght; i++){
-            if(str[i] !== 'a'){
-                console.log(str[i])
+        var text = ''
+        for(var i = 0; i < str.length; i++){
+            for(var j = i+1; j < str.length-1; j++ ){
+                if(str[i] === str[j]){
+                    text += str[i]
+                }
             }
         }
+        if(str[i] !== )
     </script>
 </body>
 </html>
