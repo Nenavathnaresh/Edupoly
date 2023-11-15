@@ -89,6 +89,12 @@
             console.log('')
 
             // assending order ....
+            for(var c = 0; c < products.length; c++){
+                products.sort(function(a,b){
+                    return a.price - b.price
+                })
+                console.log(products[c].name)
+            }
 
 
             console.log('')

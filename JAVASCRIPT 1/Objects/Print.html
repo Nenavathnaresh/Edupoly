@@ -153,6 +153,21 @@
                 console.log(marks[sub], 'fail')
             }
         //}
+
+
+
+         
+         var s = 'passed' ;
+         for(var x in marks){
+            if(marks[x] < 35){
+                s = 'fail';
+                break;
+            }
+         }
+         console.log(s)
+
+
+         
     </script>
 </body>
 </html>
