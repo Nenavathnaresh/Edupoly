@@ -61,33 +61,17 @@
             }
         ];
 
-       // var str = prompt();
-       function search(e){
-        var ar = []
-        people.forEach(function(person){
-            var x = JSON.stringify(person);
-            if(x.includes(e.target.value)){
-                ar.push(person);
-            }
-            
-        })
-        console.log(ar);
-    }
-
-    var fruits = [
-        {
-            'fn' : 'apple',
-            'color' : 'red'
-        },
-        {
-            'fn' : 'grapes',
-            'color': 'green'
-        } ,
-        {
-            'fn' : 'banana',
-            'color' : 'yellow'
+        // var str = prompt();
+        function search(e) {
+            var ar = []
+            people.forEach(function (person) {
+                var x = JSON.stringify(person);
+                if (x.includes(e.target.value)) {
+                    ar.push(person);
+                }
+            })
+            console.log(ar);
         }
-    ]
     </script>
 </body>
 
