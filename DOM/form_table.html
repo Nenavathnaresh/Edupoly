@@ -31,14 +31,6 @@
     <script>
         var people = [];
 
-        if(userForm.firstname.value < 3 || userForm.firstname.value === ''){
-
-        }
-        else{
-            
-        }
-
-
         function save() {
             person = {
                 'firstName': '',
@@ -76,9 +68,9 @@
 
             table.appendChild(thead);
 
-           
+
             people.forEach(function (person) {
-                
+
                 var thead = document.createElement('tr');
                 var td1 = document.createElement('td');
                 td1.innerHTML = person.firstName;
