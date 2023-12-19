@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Title</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody id="tb">
+
+        </tbody>
+    </table>
+    <div id="root"></div>
+    <script type="text/babel">
+        var arr = [];
+
+        axios.get('https://fakestoreapi.com/products').then((res) => {
+            //  console.log(res.data);
+            arr = res.data;
+            var x = arr.map(function (a) {
+                return (<tr>
+                    <td>{a.id}</td>
+                    <td>{a.category}</td>
+                    <td>{a.price}</td>
+                    <td>{a.rating.rate}</td>
+                    <td>{a.title}</td>
+                    <td>{<img style={{ width: '100px' }} src={a.image} />}</td>
+                </tr>)
+                
+            })
+            ReactDOM.render(x, document.getElementById('tb'))
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -29,7 +29,7 @@
     axios.get('https://fakestoreapi.com/products').then(function(res){
           console.log(res.data)
           arr = res.data;
-          console.log(arr)
+          console.log(arr[0])
           crateTable(arr)
     })
 

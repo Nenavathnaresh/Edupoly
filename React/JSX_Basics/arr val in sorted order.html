@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var arr = [65,24,8,5,33,22,84,48]
+        arr.sort((a,b)=>{
+            if(a>b){
+                return 1
+            }
+            if(a<b){
+                return -1
+            }
+            return 0;
+        })
+        var x = arr.map((a)=>{
+            return <li>{a}</li>
+        })
+        ReactDOM.render(x,document.getElementById('root'))
+
+        // var x = arr.sort().map((a)=>{
+        //     return <li>{a}</li>
+        // })
+        // ReactDOM.render(x,document.getElementById('root'))
+    </script>
+</body>
+</html>

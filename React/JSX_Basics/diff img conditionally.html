@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <div id="root1"></div>
+    <script type="text/babel">
+        var num = +prompt();
+        // var jh1 = <div>{(num%2===0)?(<img src="https://www.hartz.com/wp-content/uploads/2022/04/small-dog-owners-1.jpg"/> ):( <img src="https://hips.hearstapps.com/hmg-prod/images/dog-yorkshire-terrier-lies-on-the-floor-with-paws-royalty-free-image-1682539706.jpg?crop=0.668xw:1.00xh;0.179xw,0&resize=1200:*"/> )}</div>
+
+        // ReactDOM.render(jh1,document.getElementById('root'))
+
+        var jh1 = <div>{num &&( <img style={{width:'200px'}} src="https://www.hartz.com/wp-content/uploads/2022/04/small-dog-owners-1.jpg"/> )}</div>
+
+        var jh2 = <div>{!num &&( <img style={{width:'200px'}} src="https://hips.hearstapps.com/hmg-prod/images/dog-yorkshire-terrier-lies-on-the-floor-with-paws-royalty-free-image-1682539706.jpg?crop=0.668xw:1.00xh;0.179xw,0&resize=1200:*"/> )}</div>
+
+        ReactDOM.render(jh1,document.getElementById('root'))
+        ReactDOM.render(jh2,document.getElementById('root1'))
+    </script>
+</body>
+</html>
