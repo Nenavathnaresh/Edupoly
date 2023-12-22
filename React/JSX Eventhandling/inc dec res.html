@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var x = 0
+        function dec(){
+            document.getElementById('d1').innerHTML = x+1
+        }
+        var jh1 = <div>
+
+            <h1 id='d1'>{x}</h1>
+            <button onClick={dec}>Decrement</button>
+            <button onClick={inc}>Increment</button>
+            <button onClick={res}>Reset</button>
+
+        </div>
+
+    </script>
+</body>
+
+</html>

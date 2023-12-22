@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="root1"></div>
+    <script type="text/babel">
+        var a = +prompt();
+        var col = 'blue';
+        var bg = 'lightgreen'
+        var bord = '5px solid'
+        var h1 = <h1 style={{color:col,backgroundColor:bg,border:bord}}>Hello Edupoly</h1>
+        var h2 = <h2 style={{color:a%2===0?'green':'blue'}}>{a}</h2>
+        ReactDOM.render(h1,document.getElementById('root'))
+        ReactDOM.render(h2,document.getElementById('root1'))
+    </script>
+</body>
+</html>

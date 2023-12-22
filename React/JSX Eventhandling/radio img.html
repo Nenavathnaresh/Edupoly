@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var maleimg = 'https://images.news18.com/ibnlive/uploads/2023/04/collage-maker-28-apr-2023-10-26-am-2015.jpg'
+        var femaleimg =  'https://m.media-amazon.com/images/M/MV5BM2RlOGMxMTgtYzcyOC00ZmVlLWI1YzktNjljMjllMDNiZDEzXkEyXkFqcGdeQXVyMjkxNzQ1NDI@._V1_.jpg'
+        function dam(e){
+            if(e.target.value === 'male'){
+                document.getElementById('d1').src = maleimg
+            }
+            else{
+                document.getElementById('d1').src = femaleimg
+            }
+        }
+        var jh1 = <div>
+                    <input onChange={dam} type="radio" name='img' value='male'/>:Male
+                    <input onChange={dam} type="radio" name='img' value='female'/>:Female <br/>
+                    <img src="" id='d1'/>
+                  </div>
+            ReactDOM.render(jh1,document.getElementById('root'))
+    </script>
+</body>
+</html>

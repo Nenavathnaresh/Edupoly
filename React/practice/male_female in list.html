@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <form action="" name="userForm" onsubmit="event.preventDefault()">
+        <input type="text" name="text" id="text">
+        <input type="radio" name="radio" id="rad" value="male">Male
+        <input type="radio" name="radio" id="rad" value="female">Female
+        <button onclick="save()">Save</button>
+    </form>
+    <ul id="root"></ul>
+    <script type="text/babel">
+      var arr = []
+        function save() {
+            var obj = {
+                'name': userForm.text.value,
+                'gender':userForm.radio.value
+            }
+            arr.push(obj);
+            console.log(arr);
+            var gen =  arr.map((a,i)=>{
+                return(
+                    <li style={(a.gender === 'male')?({color:'red'}):({color:'blue'})}>
+                    {a.name} <button style={(a.gender === 'male')?({backgroundColor:'red'}):({backgroundColor:'green'})}>{a.gender === 'male'?'01':'02'}</button>
+                    </li>
+                )
+            })
+            ReactDOM.render(gen, document.getElementById('root'))
+            userForm.reset()
+        }
+    </script>
+</body>
+
+</html>

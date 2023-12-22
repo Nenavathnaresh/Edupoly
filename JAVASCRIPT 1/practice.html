@@ -1,42 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-
 <body>
-
-  <h1 onclick="console.log(this);">Hello</h1>
-
   <script>
-
-    var st1 = {
-      'name': 'Naresh',
-      'dob': '10-13-2001'
-    }
-    var st2 = {
-      'name': 'Suresh',
-      'dob': '01-01-1987'
-    }
-    function getAge() {
-      var today = new Date();
-      var birthDate = new Date(this.dob);
-      var cts = today.getTime();
-      var bts = birthDate.getTime();
-      console.log((cts - bts) / (1000 * 60 * 60 * 24 * 365));
-    }
-    var fn = getAge.bind(st1);
-    fn();
-
-
-
-
-
+   var arr = [53,64,77,32,64,7,23]
+   var x = arr.reduce((a,b,c)=>{
+      return a+b
+   })
+   console.log(x);
 
   </script>
 </body>
-
 </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody id="root">
+
+        </tbody>
+    </table>
+    <script type="text/babel">
+        var students = [
+            {
+                firstname: "Praveen",
+                lastname: "Gubbala",
+                age: 40,
+                gender: "male"
+            },
+            {
+                firstname: "Smrithi",
+                lastname: "mandana",
+                age: 25,
+                gender: 'female'
+            },
+            {
+                firstname: "mithali",
+                lastname: "raj",
+                age: 39,
+                gender: 'female'
+            },
+            {
+                firstname: "Rohit",
+                lastname: "Sharma",
+                age: 35,
+                gender: 'male'
+            },
+            {
+                firstname: "Sachin",
+                lastname: "Tendulkar",
+                age: 50,
+                gender: 'male'
+            },
+        ]
+        var tab = students.map((student)=>{
+            return (
+                <tr style={{backgroundColor:student.gender==='male'?'pink':'blue'}}>
+                    <td>{student.firstname}</td>
+                    <td>{student.lastname}</td>
+                    <td>{student.age}</td>
+                    <td>{student.gender}</td>
+                </tr>
+            )
+        })
+        ReactDOM.render(tab,document.getElementById('root'))
+       
+
+    </script>
+
+</body>
+
+</html>
