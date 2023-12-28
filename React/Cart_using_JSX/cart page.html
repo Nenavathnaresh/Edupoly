@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cart Items</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -16,13 +16,17 @@
 </head>
 
 <body>
+    <div id="root3" class="sticky-top bg-info d-flex"></div>
+    <div id="root4"></div>
     <div class="d-flex">
-        <div id="root1" class="d-flex flex-wrap w-75"></div>
-        <div class="w-25 border border-warning m-3 rounded"> <h1 id="h1"></h1></div>
+        <div id="root1" class="d-flex flex-wrap justify-content-around w-75"></div>
+        <div id="root2" class="w-25 p-3"></div>
     </div>
     <script type="text/babel">
 
-        var arr = JSON.parse(window.localStorage.getItem('productArr'))
+      var arr = JSON.parse(window.localStorage.getItem('productArr'))
+
+      
 
       var  cartarr = arr.filter((a) => {
             return a.isIteminCart
@@ -31,21 +35,43 @@
         cartarr = cartarr.map((c) => {
             return { ...c, count: 1 }
         })
-        console.log(cartarr);
+
+        var nav = <>
+                <a class='me-auto ms-4' href="index.html"><img  style={{ width: "70px", height: '70px' }} src="https://w7.pngwing.com/pngs/384/470/png-transparent-retail-computer-icons-e-commerce-sales-mega-offer-miscellaneous-service-logo.png" /></a>
+                <div class='w-50 mt-3 h-50 d-flex bg bg-white rounded'><i class="bi bi-search mt-1 ms-1"></i><input class='form-control h-50 border-0' type="text" placeholder='Search...' onKeyUp={() => { search(event) }} /></div>
+                <a href="cart page.html"><button class=' me-5 btn '><h1  class="bi bi-cart-check m-0  position-relative"><span style={{fontSize:'12px',top:'0px',left:'70%'}} id='h1' class='position-absolute  rounded-pill badge bg-warning'>{cartarr.length}</span></h1></button></a>
+            </>
+            ReactDOM.render(nav, document.getElementById('root3'))
+        
+      
 
         function createCart() {
+            if(cartarr.length === 0){
+                document.getElementById('root1').innerHTML = ''
+                document.getElementById('root2').innerHTML = ''
+            var noItem = <div class='d-flex flex-column text-center'>
+                            <h1 style={{fontSize:'100px'}} class='text-warning'>Oops</h1>
+                            <h1 style={{fontSize:'200px'}} class="bi bi-exclamation-circle text-warning"></h1>
+                            <h4>No items in your Cart</h4>
+                            <h5>Add items to continue shopping</h5>
+                            <a href="index.html"><button class='btn btn-warning btn-lg w-25'>Shop now</button></a>
+                        </div>
+                ReactDOM.render(noItem,document.getElementById('root4'))
+        }
+        else{
             var y = cartarr.map((a, i) => {
                 return (
-                    <div class='rounded border border-warning' style={{width: '30%', margin: '5px', padding: '10px', textAlign: 'center', }}>
-                        <span><img style={{ width: '100px' }} src={a.image} /></span><br />
-                        <span>Title:{a.title}</span><br />
-                        <span>Category:{a.category}</span><br />
-                        <span>Price:{a.price}</span><br />
+                    <div class='rounded border border-warning d-flex flex-column hover shadow mt-2 ms-2' style={{width: '32%', padding: '10px', textAlign: 'center', }}>
+                        <span><img style={{ width: '100px',height:'100px' }} src={a.image} /></span>
+                        <span>Title:{a.title}</span>
+                        <span>Category:{a.category}</span>
+                        <span class='mb-auto'>Price:{a.price}</span>
+                        <div>
                         <button class='btn btn-danger ' onClick={() => (decrement(a))}><i class="bi bi-arrow-down"></i></button>
                         <input class='w-25' type="text" id="text" value={a.count} />
                         <button class='btn btn-danger me-3' onClick={() => { increment(a) }}><i class="bi bi-arrow-up"></i></button>
-                        <button class='btn btn-success ms-3' onClick={() => { remove(i,a) }}>Remove</button>
-
+                        <button class='btn btn-success ms-3' onClick={() => { remove(i,a) }}> <i class="bi bi-cart-dash bg-success"></i> Remove</button>
+                    </div>
                     </div>
 
                 )
@@ -55,17 +81,23 @@
             ReactDOM.render(y, document.getElementById('root1'));
             totalPrice()
         }
+       
+        }
         createCart()
+           
 
         function decrement(obj) {
 
             obj.count < 2 && disabled
             obj.count--
+            
             createCart()
         }
         function increment(obj) {
             obj.count++;
             createCart()
+        
+            
         }
         function remove(index,prod) {
             arr.find((item)=>{
@@ -75,16 +107,40 @@
             window.localStorage.setItem('productArr',[JSON.stringify(arr)])
             cartarr.splice(index, 1);
             createCart();
+        
         }
         function totalPrice() {
-            var h1 = document.getElementById('h1')
+            // numOfItems=cartarr.reduce((c,d)=>{
+                
+            //     return (c['count'] + d['count'])
+            // })
+            var numOfItems = 0;
+            cartarr.forEach((a)=>{
+                numOfItems += a.count;
+            })
+            
             var total = cartarr.reduce((a, b) => {
-                console.log(a);
+                
                 return (a + (b['price'] * b['count']))
             }, 0)
-            
-            h1.innerHTML = `Total Price :${total}`
+
+
+            var priceDetails = <div class='p-3 bg-light rounded-4 shadow '>
+                                <h5 class='text-secondary'>PRICE DETAILS</h5>
+                                <div class='d-flex'><span class='me-auto'>Price(<b>{numOfItems}</b>items)</span><b><i class="bi bi-currency-rupee"></i>{total.toFixed(2)}</b></div>
+                                <div class='d-flex'><span class='me-auto'>Discount</span><b class='text-success'><i class="bi bi-currency-rupee"></i>0</b></div>
+                                <div class='d-flex border-bottom mb-2'><span class='me-auto'>Delivery Charges</span>
+                                    {total>=500&&<><span class='text-success text-decoration-line-through bi bi-currency-rupee'>50</span><b class='text-success'>FREE</b></>}
+                                    {!(total>=500)&&<b class='text-success bi bi-currency-rupee'>50</b>}
+
+                                </div>
+                                <div ><h4 class='d-flex'><span class='me-auto'>Total Amount</span><span><i class="bi bi-currency-rupee"></i>
+                                    {!(total>=500)&&(total + 50).toFixed(2)}{total>=500&&total.toFixed(2)}</span></h4></div>
+                               </div>
+                               ReactDOM.render(priceDetails, document.getElementById('root2'))
         }
+
+       
     </script>
 
     </script>

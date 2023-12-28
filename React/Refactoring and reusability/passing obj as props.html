@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body >
+    <div style="border: 2px solid; margin: 10px; padding: 10px;">
+        <h1>Welcome to Edupoly React</h1>
+        <div id="root"></div>
+    </div>
+    
+    <script type="text/babel">
+        var mi = ['rohit','surya','ishanth','bumrah','tilak'];
+        var rcb = ['virat','faf','maxi','siraj','dinesh'];
+        var srh = ['williams','sundar','buvi','nataraj','warner'];
+        var csk = ['mahi','raina','jaddu','dube','rayudu'];
+        
+       var Abc = (arg)=>{
+            return (
+                <div style={{border:'1px solid',padding:'10px', margin:'10px'}}>
+                    <h1>{arg.name}</h1>
+                    {
+                        arg.t.map((player)=>{
+                            return <>
+                                     <li>{player}</li>
+                                    </>
+                        })
+                    }
+                </div>
+            )
+       }
+       var teams = <div>
+                        <Abc  t = {rcb} name={'Royal challengers Bangalore'}></Abc>
+                        <Abc  t = {srh} name={'Sun Rises Hyderabad'}></Abc>
+                        <Abc  t = {csk} name = {'Chennai Super Kings'}></Abc>
+                        <Abc  t = {mi} name = {'Munbai Indians'}></Abc>
+                       
+                   </div>
+    ReactDOM.render(teams,document.getElementById('root'))
+    </script>
+   
+</body>
+</html>

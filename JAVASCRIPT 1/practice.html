@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <script>
-   var arr = [53,64,77,32,64,7,23]
-   var x = arr.reduce((a,b,c)=>{
-      return a+b
-   })
-   console.log(x);
 
-  </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var mi = ['rohit', 'surua', 'krishna', 'bhumra', 'david'];
+        var rcb = ['faf', 'virat', 'dk', 'maxi', 'siraj'];
+        var sh = ['kane williamson', 'manish', 'bhuvi', 'warner', 'ben stokes'];
+        var csk = ['dhoni', 'raina', 'jadeja', 'rayudu', 'karan'];
+
+       var Ipl = function(arg){
+        return <div>
+          <h1>rcb</h1>
+                  {
+                    arg.teams.map((player)=>{
+                      return <li>{player}</li>
+                    })
+                  }
+              </div>
+       }
+        var tp = <div>
+            <Ipl teams={mi}></Ipl>
+            <Ipl teams={rcb}></Ipl>
+            <Ipl teams={sh}></Ipl>
+            <Ipl teams={csk}></Ipl>
+        </div>
+        ReactDOM.render(tp, document.getElementById("root"))
+    </script>
 </body>
+
 </html>

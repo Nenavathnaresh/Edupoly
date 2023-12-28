@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,28 +8,22 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-
-<body>
+<body >
+    
     <div id="root"></div>
+    
+    
     <script type="text/babel">
-        var x = 0
-        function counter(a){
-            document.getElementById('d1').innerHTML = x+=a;
+        var Todo = ()=>{
+            return <div>
+                    
+                        <input type="text" name="" id=""/>
+                        <button>Add Task</button>
+                    
+                    </div>
         }
-        function res(a){
-            document.getElementById('d1').innerHTML = a;
-        }
-        var jh1 = <div>
-
-            <h1 id='d1'>{x}</h1>
-            <button onClick={()=>{counter(-1)}}>Decrement</button>
-            <button onClick={()=>{counter(1)}}>Increment</button>
-            <button onClick={()=>{res(0)}}>Reset</button>
-
-        </div>
-        ReactDOM.render(jh1,document.getElementById('root'))
-
+    ReactDOM.render(teams,document.getElementById('root'))
     </script>
+   
 </body>
-
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var Abc = ()=>{
+           return (
+            <div style={{backgroundColor:'blue'}}>
+                <h1>Animals gallery</h1>
+                <div style={{backgroundColor:'white', margin:'10px',padding:'10px'}}>
+                    <h3>slide</h3>
+                    <img width='100px' src="https://images.pexels.com/photos/34098/south-africa-hluhluwe-giraffes-pattern.jpg?cs=srgb&dl=pexels-pixabay-34098.jpg&fm=jpg"/>
+                    <img width='100px' src="https://t4.ftcdn.net/jpg/05/51/73/07/360_F_551730796_1hsv3NPmpSlhmyWXHtthxK7TfDEka6cQ.jpg"/>
+                    <img width='100px' src="https://www.shutterstock.com/image-photo/zebras-herd-on-savanna-sunset-600nw-125850227.jpg"/>
+                </div>
+                <div style={{backgroundColor:'white', margin:'10px',padding:'10px'}}>
+                    <h3>slide</h3>
+                    <img width='100px' src="https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                    <img width='100px' src="https://images.pexels.com/photos/564065/pexels-photo-564065.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+                    <img width='100px' src="https://images.pexels.com/photos/1161556/pexels-photo-1161556.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+                    <img width='100px' src="https://images.pexels.com/photos/13364060/pexels-photo-13364060.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                    <img width='100px' src="https://images.pexels.com/photos/13301844/pexels-photo-13301844.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+                    <img width='100px' src="https://images.pexels.com/photos/7125128/pexels-photo-7125128.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+                </div>
+            </div>
+           )
+        }
+        ReactDOM.render(<Abc/>,document.getElementById('root'))
+    </script>
+    
+</body>
+</html>

@@ -17,19 +17,20 @@
 
 <body>
     <div class="">
-        <div id="root1"  class="sticky-top bg-info d-flex"></div> 
-        <div id="root" class="table d-flex flex-wrap border justify-content-evenly"></div>
+        <div id="root1" class="sticky-top bg-info d-flex"></div>
+        <div class="d-flex">
+            <div style="width:15%" id="filterdiv" class="d-flex flex-column"></div>
+            <div id="root" class="table d-flex flex-wrap justify-content-evenly w-100"></div>
+
+        </div>
     </div>
     <script type="text/babel">
         var productArr = [];
-        var nav = <>                      
-                    <img class='me-auto ms-4' style={{width:"70px",height:'70px'}} src="https://w7.pngwing.com/pngs/384/470/png-transparent-retail-computer-icons-e-commerce-sales-mega-offer-miscellaneous-service-logo.png" />
-                    <a href="cart page.html"><button class=' me-5 btn '><h1 class="bi bi-cart-check m-0"></h1></button></a>
-                  </>
-            ReactDOM.render(nav,document.getElementById('root1'))
-        
-        axios.get('https://fakestoreapi.com/products').then((res) => {
+        var categoryArr = [];
+        var sortValue = "";
+       
 
+        axios.get('https://fakestoreapi.com/products').then((res) => {
             productArr = res.data.map((b) => {
                 return ({ ...b, 'isIteminCart': false })
             })
@@ -40,25 +41,34 @@
             else {
                 productArr = JSON.parse(window.localStorage.getItem('productArr'))
             }
+            
+            var nav = <>
+                <a class='me-auto ms-4' href="index.html"><img style={{ width: "70px", height: '70px' }} src="https://w7.pngwing.com/pngs/384/470/png-transparent-retail-computer-icons-e-commerce-sales-mega-offer-miscellaneous-service-logo.png" /></a>
+                <div class='w-50 mt-3 h-50 d-flex bg bg-white rounded'><i class="bi bi-search mt-1 ms-1"></i><input class='form-control h-50 border-0' type="text" placeholder='Search...' onKeyUp={() => { search(event) }} /></div>
+                <a href="cart page.html"><button class=' me-5 btn '><h1  class="bi bi-cart-check m-0  position-relative"><span style={{fontSize:'12px',top:'0px',left:'70%'}} id='h1' class='position-absolute  rounded-pill badge bg-warning'></span></h1></button></a>
+            </>
+            ReactDOM.render(nav, document.getElementById('root1'))
 
             function cartPage() {
                 var x = <>
                     {
                         productArr.map((product, index) => {
                             return (
-                                <div class='rounded border border-3 border-black' style={{width: '30%', margin: '5px', padding: '10px', textAlign: 'center'}}>
-                                    <span ><img style={{ width: '100px' }} src={product.image} /></span><br />
+                                <div class='rounded border border-3 border-black shadow ' style={{ width: '30%', margin: '5px', padding: '10px', textAlign: 'center' }}>
+                                    <span ><img style={{ width: '100px', height: '100px' }} src={product.image} /></span><br />
                                     <span>Title:{product.title}</span><br />
                                     <span>Category:{product.category}</span><br />
-                                    <span>Price:{product.price}</span><br />
-                                    <button class='btn btn-warning' disabled={product.isIteminCart ? true : false} onClick={() => { addtoCart() }}> <i class="bi bi-cart-plus bg-warning"></i> Add to Cart  </button>
+                                    <span class='mb-auto'>Price:{product.price}</span><br />
+                                   { !product.isIteminCart&& <button class='btn btn-warning'  onClick={() => { addtoCart() }}> <i class="bi bi-cart-plus bg-warning"></i> Add to Cart  </button>}
+                                   { product.isIteminCart&&<button class='btn btn-warning' ><a class='bg-transparent text-decoration-none' href="cart page.html"> <i class="bi bi-cart-plus bg-warning"></i> Go to Cart </a> </button>}
                                 </div>
                             )
                             function addtoCart() {
+                                
                                 product.isIteminCart = true
-                                //console.log(productArr);
                                 window.localStorage.setItem("productArr", [JSON.stringify(productArr)])
                                 cartPage()
+                                cartCount()
                             }
                         })
                     }
@@ -66,7 +76,102 @@
                 ReactDOM.render(x, document.getElementById('root'))
             }
             cartPage()
+
+            function search(e) {
+                productArr = JSON.parse(window.localStorage.getItem('productArr'))
+                runfilter()
+                productArr = productArr.filter((n) => {
+                    return n.title.toLowerCase().includes(e.target.value.toLowerCase());
+                })
+                cartPage()
+            }
+
+
+            var fildiv = <div class='border border-3 rounded m-2 p-2 position-fixed shadow'>
+                <><h3>Category:</h3></>
+                <p><input type="checkbox" onChange={() => { checkfilter(event) }} name="" id="f1" value="men's clothing" /> <label for="f1">Men's clothing</label></p>
+                <p><input type="checkbox" onChange={() => { checkfilter(event) }} name="" id="f2" value="women's clothing" /> <label for="f2">Women's clothing</label></p>
+                <p> <input type="checkbox" onChange={() => { checkfilter(event) }} name="" id="f3" value='jewelery' /> <label for="f3">Jewelery</label></p>
+                <p><input type="checkbox" onChange={() => { checkfilter(event) }} name="" id="f4" value='electronics' /> <label for="f4">Electronics</label></p>
+                <><h3>Sort:</h3></>
+                <p><input type="radio" onChange={(e) => { sortitems(event) }} name="cat" id="f5" value='low to high' /> <label for="f5">sort(Low to High)</label></p>
+                <p><input type="radio" onChange={(e) => { sortitems(event) }} name="cat" id="f6" value='high to low' /> <label for="f6">sort(High to Low)</label></p>
+            </div>
+            ReactDOM.render(fildiv, document.getElementById('filterdiv'))
+
+
+            function checkfilter(e) {
+                productArr = JSON.parse(window.localStorage.getItem('productArr'))
+                if (e.target.checked === true) {
+                    categoryArr.push(e.target.value)
+                }
+                else {
+                    categoryArr.splice(categoryArr.indexOf(e.target.value), 1)
+                }
+                runfilter()
+                cartPage()
+            }
+
+            function filtercat(cArr) {
+                productArr = productArr.filter((product) => {
+                    return cArr.includes(product.category)
+                })
+                console.log(productArr);
+            }
+
+            function runfilter() {
+                if (categoryArr.length > 0) {
+                    filtercat(categoryArr)
+                }
+                if (sortValue.length > 0) {
+                    checkSort()
+                }
+            }
+
+            function sortitems(e) {
+                sortValue = e.target.value;
+                runfilter()
+                cartPage()
+            }
+
+            function checkSort() {
+                if (sortValue === 'low to high') {
+                    productArr.sort((a, b) => {
+                        if (a.price > b.price) {
+                            return 1
+                        }
+                        if (a.price < b.price) {
+                            return -1
+                        }
+                        return 0
+                    })
+                }
+                else {
+                    productArr.sort((a, b) => {
+                        if (a.price > b.price) {
+                            return -1
+                        }
+                        if (a.price < b.price) {
+                            return 1
+                        }
+                        return 0
+                    })
+                }
+
+                cartPage()
+            }
+            function cartCount(){
+                var countItem =0;
+                productArr.forEach((a)=>{
+                    if(a.isIteminCart){
+                        countItem++
+                    }
+                })
+                document.getElementById('h1').innerHTML = countItem;
+            }
+            cartCount()
         })
+
 
 
     </script>

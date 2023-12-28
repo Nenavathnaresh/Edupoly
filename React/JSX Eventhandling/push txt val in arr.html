@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <ul id="root1"></ul>
+    <script type="text/babel">
+        var arr = [];
+        function push(){
+            var x = document.getElementById('txt');
+            arr.push(x.value)
+            createLi()
+        }
+
+       function createLi(){
+        var item = arr.map((a,i)=>{
+                return ( <li>{a} <button onClick={()=>{delet(a,i)}}>Del</button> </li> )
+            })
+            ReactDOM.render(item,document.getElementById('root1'))
+       }
+
+        function delet(ad,ind){
+            arr.splice(ind,1)
+            console.log(arr);
+            createLi()
+        }
+
+        var jh1 = <> <input type="text" name="" id="txt"/>
+                    <button onClick = {push}>Click to push</button>
+                  </>
+        ReactDOM.render(jh1,document.getElementById('root'))
+    </script>
+    
+</body>
+</html>
