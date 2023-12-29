@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script>https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.3/axios.min.js</script>
+    <script src="products.js"></script>
+</head>
+
+<body>
+    <div id="root" class="container"></div>
+    <script type="text/babel">
+        // var products = []
+        // axios.get('https://fakestoreapi.com/products').then((res)=>{
+
+        //     products = res.data
+        //     console.log(products);
+        // })
+    
+        function Products() {
+            var [allpro, setAllpro] = React.useState(products);
+            let [order, setOrder] = React.useState(true);
+            let [caret, setCaret] = React.useState(null);
+            let [sea,setSea] = React.useState(products)
+            let [arr,setarr] = React.useState([])
+            var rows;
+            var pagenum;
+
+            function sortProducts(head) {
+                var temp = [...allpro]
+                temp.sort((a, b) => {
+                    if (a[head] > b[head]) { return order ? 1 : -1 }
+                    if (a[head] < b[head]) { return order ? -1 : 1 }
+                    return 0
+                })
+                setAllpro(temp)
+                setOrder(!order)
+                setCaret(head)
+            }
+
+            function search(e){   
+                var x = sea.filter((char)=>{
+                    return (
+                        char.title.toLowerCase().includes(e.target.value.toLowerCase())
+                    )   
+                })
+                setAllpro(x)
+                
+            }
+
+            function selectpage(e){
+                var p = products.slice(0,e.target.value)
+                setAllpro(p)
+
+                var arr = []
+                var q = e.target.value
+                for(var i=1;i<=20/q;i++){
+                    var btn = <button className='btn btn-light m-1' onClick={changepage}>{i}</button>
+                    arr.push(btn)
+
+                }
+                rows = q;
+                setarr([...arr])     
+            }
+
+            function changepage(e){
+                pagenum = parseInt(e.target.innerHTML)
+                var p = products.slice(rows*(pagenum-1),rows*pagenum)
+                setAllpro(p)
+            }
+          
+
+            return (
+                <div>
+                    <div className='d-flex'>Show
+                        <select className='ms-1 rounded' onChange={selectpage} >
+                            <option  value="20">All</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                        </select>
+                        <span className='ms-auto'>Search:</span><input className='ms-1 w-50 rounded' onKeyUp={(event)=>{search(event)}} type="text"/>
+                    </div>
+                    <table className='table table-bordered table-hover'>
+                        <thead className='position-sticky top-0 text-center'>
+                            <tr >
+                                <th onClick={() => { sortProducts('title') }} className='bg-success'>Title{'title' === (caret) && (<i class="bi bi-caret-down-fill"></i>)}</th>
+                                <th onClick={() => { sortProducts('price') }} className='bg-success'>price{'price' === (caret) && (<i class="bi bi-caret-down-fill"></i>)}</th>
+                                <th onClick={() => { sortProducts() }} className='bg-success'>Description</th>
+                                <th onClick={() => { sortProducts('category') }} className='bg-success'>Category{'category' === (caret) && (<i class="bi bi-caret-down-fill"></i>)}</th>
+                                <th onClick={() => { sortProducts() }} className='bg-success'>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                allpro.map((product) => {
+                                    return (
+                                        <tr>
+                                            <td>{product.title}</td>
+                                            <td>{product.price}</td>
+                                            <td>{product.description.slice(0, 100)}</td>
+                                            <td>{product.category}</td>
+                                            <td><img width='50px' src={product.image} /> </td>
+                                        </tr>
+                                    )
+                                })
+                            }
+
+                        </tbody>
+                    </table>
+                    <div id='dd'>
+                       
+                        <p>showing <span>{rows*(pagenum-1)}</span>to <span>{rows*pagenum}</span>of 20 entries</p>
+                        <button className='btn btn-secondary me-1'>Previous</button>
+                       {
+                        arr.map((b)=>{
+                            return b
+                        })
+                       }
+                       <button className='btn btn-secondary ms-1'>Next</button>
+                    </div>
+                </div>
+            )
+        }
+        ReactDOM.render(<Products />, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
