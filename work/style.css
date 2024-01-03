@@ -1,0 +1,42 @@
+#listItems li{
+    list-style-type: none;
+    padding: 10px;
+}
+#feature li{
+    list-style-type: none;
+    width: 30%;
+    
+}
+
+#feature i{
+    font-size: 50px;
+    color: rgb(52, 52, 243);
+}
+
+#feature h2,h4{
+    color: rgb(52, 52, 243);
+}
+
+#course li{
+    list-style-type: none;
+}
+
+.hover:hover{
+    color: blue;
+}
+
+.tpwidth{
+    width: 23%;
+}
+
+.head{
+    color: rgb(52, 52, 243);
+}
+
+.secondary{
+    color: gray;
+}
+#icon{
+    font-size: 70px;
+    
+}
