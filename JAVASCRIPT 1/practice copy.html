@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .carousel-inner .carousel-item.active,
+    .carousel-inner .carousel-item.next,
+    .carousel-inner .carousel-item.prev{
+      display: flex;
+    }
+  </style>
+  </head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    var arr = [
+    "https://cdn-icons-png.flaticon.com/512/4138/4138124.png",
+    "https://cdn-icons-png.flaticon.com/512/2175/2175193.png",
+    "https://cdn-icons-png.flaticon.com/512/3670/3670051.png",
+    'https://cdn-icons-png.flaticon.com/256/1384/1384060.png',
+    'https://cdn-icons-png.flaticon.com/512/4436/4436481.png',
+   ' https://www.freepatternsarea.com/wp-content/uploads/2022/04/youtube-logo-button-icon-vector-designs-600x503.jpg'
+    ]
+    function Carousel() {
+      return (
+        <div id="idcarousel" className='carousel slide' data-bs-ride="carousel">
+          <div className="carousel-inner">
+           
+              {arr.map((a,b)=>{
+                if( b===0)  
+                return(
+                  <div className="carousel-item active" data-bs-interval="2000">
+                  <div className='col-md-3'>
+                    <div className='card'>
+                      <div className='card-body'>
+                        <img src={a} width='200px' alt=""/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 )
+
+                 else{
+                  return(
+                  <div className="carousel-item" data-bs-interval="2000">
+                    <div className='col-md-3'>
+                    <div className='card'>
+                      <div className='card-body'>
+                        <img src={a} width='200px' alt=""/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 )
+                 }
+              })}
+            
+          </div>
+        </div>
+      )
+    }
+
+    var items = document.querySelectorAll('.carousel .carousel-item');
+    items.forEach((e)=>{
+      const slide = 3;
+      let next = e.nextElementSibling;
+      for(var i = 0; i<slide;i++){
+        if(!next){
+          next = items[0]
+        }
+        let clonechild = next.cloneNode(true)
+        e.appendChild(clonechild.children[0])
+        next = next.nextElementSibling
+      }
+    })
+
+    ReactDOM.render(<Carousel />, document.getElementById("root"))
+  </script>
+</body>
+
+</html>
