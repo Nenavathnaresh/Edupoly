@@ -109,33 +109,33 @@ var topCourse = [
 
 var feedbackArr = [
     {
-        'icon':'bi bi-person-circle',
+        'icon':'naresh.jpg',
         'name':'Nenavath Naresh',
         'feedback':'The environment of institute creates for getting knowldge on web technologies and provides best knowledge for the students and a lot practice assignment helps very much for the students.'
     },
     {
-        'icon':"bi bi-person-circle",
+        'icon':"suresh.jpg",
         'name':'Nenavath Suresh',
         'feedback':'The environment of institute creates for getting knowldge on web technologies and provides best knowledge for the students and a lot practice assignment helps very much for the students.'
     },
     {
-        'icon':"bi bi-person-circle",
+        'icon':"divya.jpeg",
         'name':'Nenavath Divya',
         'feedback':'The environment of institute creates for getting knowldge on web technologies and provides best knowledge for the students and a lot practice assignment helps very much for the students.'
     },
     {
-        'icon':"bi bi-person-circle",
+        'icon':"suresh1.jpg",
         'name':'Nenavath Tharun',
         'feedback':'The environment of institute creates for getting knowldge on web technologies and provides best knowledge for the students and a lot practice assignment helps very much for the students.'
     },
    
     {
-        'icon':"bi bi-person-circle",
+        'icon':"nnn.jpg",
         'name':'Eslavath Srinu',
         'feedback':'The environment of institute creates for getting knowldge on web technologies and provides best knowledge for the students and a lot practice assignment helps very much for the students.'
     },
     {
-        'icon':"bi bi-person-circle",
+        'icon':"naresh.jpg",
         'name':'Eslavath Siddu',
         'feedback':'The environment of institute creates for getting knowldge on web technologies and provides best knowledge for the students and a lot practice assignment helps very much for the students.'
     },

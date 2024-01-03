@@ -40,3 +40,15 @@
     font-size: 70px;
     
 }
+.i2:hover{
+    transform: scale(1.05);
+}
+#d1{
+    border-radius: 50%;
+}
+.li:hover{
+    background-color: black;
+    color: white;
+    border-style: groove;
+    cursor: pointer;
+}

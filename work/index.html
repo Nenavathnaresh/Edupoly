@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edupoly clone</title>
+    <link rel="icon" type="" href="https://static-00.iconduck.com/assets.00/e-letter-icon-2048x2048-z4u36zka.png">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
@@ -14,6 +15,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="banner.png">
 
@@ -59,19 +63,43 @@
                         <h1 className='head'>Our Student Feedback</h1>
                         <p className='secondary'>Read what our past students speak about us</p>
                     </div>
-                    <div className='d-flex flex-wrap justify-content-between text-center'>
-                        {
-                            feedbackArr.map((a)=>{
-                                return(
-                                    <div className=' p-2 m-3 shadow bg-light' style={{width:'30%'}}>
-                                        <h1 id='icon' className={a.icon}></h1>
-                                        <h5 className='head'>{a.name}</h5>
-                                        <p>{a.feedback}</p>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {
+                                    feedbackArr.map((a, b) => {
+                                        if (b === 0) {
+                                            return (
+                                                <div class="carousel-item active card text-center w-50 bg-light shadow p-2" data-bs-interval='2000'>
+                                                    <img id='d1' src='naresh1.jpg' width='60px' height='60px' alt=""/>
+                                                    <h5 className='head'>{a.name}</h5>
+                                                    <p>{a.feedback}</p>
+                                                </div>
+                                            )
+                                        }
+                                        else {
+                                            return (
+                                                <div class="carousel-item card text-center w-50 bg-light shadow p-2" data-bs-interval='2000'>
+                                                    <img id='d1' src={a.icon} width='60px' height='60px'/>
+                                                    <h5 className='head'>{a.name}</h5>
+                                                    <p>{a.feedback}</p>
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                }
+
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon bg-success" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon bg-success" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    
                 </div>
             )
         }
@@ -122,7 +150,7 @@
                                 return (
                                     <div className='position-relative d-flex flex-wrap justify-content-between tpwidth'>
                                         <div>
-                                            <img className='rounded mb-4 shadow border w-100' src={a.img} />
+                                            <img className='rounded mb-4 shadow border w-100 i2' src={a.img} />
                                         </div>
                                         <div className='position-absolute bottom-0 pb-4 ps-2 text-dark'>
                                             <h4 style={{ color: 'black' }}>{a.course}</h4>
@@ -178,10 +206,10 @@
                         </div>
                         <div >
                             <ul id='listItems' className='d-flex flex-wrap justify-content-around m-0'>
-                                <li>Courses</li>
-                                <li>Tutorials</li>
-                                <li>Training</li>
-                                <li>Contact Us</li>
+                                <li className='li'>Courses</li>
+                                <li className='li'>Tutorials</li>
+                                <li className='li'>Training</li>
+                                <li className='li'>Contact Us</li>
                                 <li><i class="bi bi-bookmark-star-fill"></i></li>
                             </ul>
                         </div>
