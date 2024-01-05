@@ -13,79 +13,90 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-    .carousel-inner .carousel-item.active,
-    .carousel-inner .carousel-item.next,
-    .carousel-inner .carousel-item.prev{
-      display: flex;
-    }
+   li{
+    list-style: none;
+   }
   </style>
   </head>
 
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    var arr = [
-    "https://cdn-icons-png.flaticon.com/512/4138/4138124.png",
-    "https://cdn-icons-png.flaticon.com/512/2175/2175193.png",
-    "https://cdn-icons-png.flaticon.com/512/3670/3670051.png",
-    'https://cdn-icons-png.flaticon.com/256/1384/1384060.png',
-    'https://cdn-icons-png.flaticon.com/512/4436/4436481.png',
-   ' https://www.freepatternsarea.com/wp-content/uploads/2022/04/youtube-logo-button-icon-vector-designs-600x503.jpg'
-    ]
-    function Carousel() {
-      return (
-        <div id="idcarousel" className='carousel slide' data-bs-ride="carousel">
-          <div className="carousel-inner">
-           
-              {arr.map((a,b)=>{
-                if( b===0)  
-                return(
-                  <div className="carousel-item active" data-bs-interval="2000">
-                  <div className='col-md-3'>
-                    <div className='card'>
-                      <div className='card-body'>
-                        <img src={a} width='200px' alt=""/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                 )
 
-                 else{
-                  return(
-                  <div className="carousel-item" data-bs-interval="2000">
-                    <div className='col-md-3'>
-                    <div className='card'>
-                      <div className='card-body'>
-                        <img src={a} width='200px' alt=""/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                 )
-                 }
-              })}
-            
-          </div>
-        </div>
-      )
+   function Todolist(props){
+    let [todoArr, setTodoArr] = React.useState([]);
+
+    function addToList(){
+      let input = document.getElementById('d1');
+      let temp = [...todoArr,{'task':input.value, 'status':false}]
+      setTodoArr([...temp])
     }
 
-    var items = document.querySelectorAll('.carousel .carousel-item');
-    items.forEach((e)=>{
-      const slide = 3;
-      let next = e.nextElementSibling;
-      for(var i = 0; i<slide;i++){
-        if(!next){
-          next = items[0]
-        }
-        let clonechild = next.cloneNode(true)
-        e.appendChild(clonechild.children[0])
-        next = next.nextElementSibling
-      }
-    })
+    function delbtn(ind){
+        todoArr.splice(ind,1)
+        setTodoArr([...todoArr])
+      
+    }
 
-    ReactDOM.render(<Carousel />, document.getElementById("root"))
+    function donebtn(ind){
+      todoArr[ind].task = true;
+      
+    }
+
+      return(
+        <div className='border border-4 p-3 container' >
+          <Header/>
+          <FormInput addToList = {addToList}/>
+          <Alltodo todoArr={todoArr} delbtn={delbtn} donebtn={donebtn} undobtn={undobtn} editbtn={editbtn} />
+        </div>
+      )
+   }
+
+   function Header(){
+    return(
+      <div className='border border-4 p-3' >
+        </div>
+    )
+   }
+   
+   function FormInput(props){
+    return(
+      <div className='border border-4 p-3' >
+        <input type="text" name="" id="d1"/>
+        <button onClick={()=>{props.addToList()}}>Add to list</button>
+        </div>
+    )
+   }
+    
+   function Alltodo(props){
+    return(
+      <div className='border border-4 p-3' >
+        {
+          props.todoArr.map((todo,i)=>{
+            return(
+              <Todo todo={todo} i={i} delbtn={props.delbtn} donebtn={props.donebtn} undobtn={props.undobtn} editbtn={props.editbtn}  />
+            )
+          })
+        }
+        </div>
+    )
+   }
+
+   function Todo(props){
+    return(
+      <div className='border border-4 p-3' >
+        <li><h3>{props.todo.task}</h3>
+          <button onClick={()=>{props.delbtn(props.i)}}>Delete</button>
+          <button onClick={()=>{props.donebtn(props.i)}}>Done</button>
+          <button onClick={()=>{props.undobtn(props.i)}}>Undo</button>
+          <button onClick={()=>{props.editbtn(props.i)}}>Edit</button>
+        </li>
+        </div>
+    )
+   }
+   
+
+    ReactDOM.render(<Todolist/>, document.getElementById("root"))
   </script>
 </body>
 

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function Todolist() {
+            let [todoArr, setTodo] = React.useState([]);
+            let [filArr, setFilArr] = React.useState([]);
+            var [index,setIndex] = React.useState(null);
+            var [x,setX] = React.useState(false)
+
+            function addToList() {
+                var input = document.getElementById('d1').value;
+                var temp = [...todoArr, {task:input,status:false}];
+                setFilArr([...temp])
+                setTodo([...temp])
+                document.getElementById('d1').value = ''
+            }
+
+            function delbtn(ind) {
+                todoArr.splice(ind,1);
+                setTodo([...todoArr])
+            }
+
+            function donebtn(ind){
+                todoArr[ind].status = true;
+                setTodo([...todoArr])
+            }
+
+            function undobtn(ind){
+                todoArr[ind].status = false;
+                setTodo([...todoArr])
+            }
+
+            function editbtn(ind){
+                var input = document.getElementById('d1');
+                input.value = todoArr[ind].task;
+                setTodo([...todoArr]);
+                index = ind 
+                setIndex(index)
+                x = true;
+                setX(x);
+            }
+
+            function updatebtn(){
+                var input = document.getElementById('d1');
+                todoArr[index].task = input.value
+                setTodo([...todoArr]);
+                input.value = '';
+            }
+
+            function filter(e){
+                filArr=[...todoArr]
+               if(e === 'completed'){
+                filArr = todoArr.filter((todo)=>{
+                    return (
+                        todo.status
+                    )
+                })
+            
+               }
+               else if(e === 'pending'){
+                filArr = todoArr.filter((todo)=>{
+                    return (
+                        !(todo.status)
+                    )
+                })
+                
+               }
+               
+                
+                setFilArr(filArr)
+               
+               
+                
+                console.log(filArr);
+            }
+
+            return (
+                <div className='border border-4 border-success p-1 mt-3 container '>
+                    <Header filter={filter} />
+                    <Forminput addToList={addToList} updatebtn={updatebtn} x ={x} />
+                    <Alltodo todoArr={todoArr} delbtn={delbtn} donebtn={donebtn} undobtn={undobtn} editbtn={editbtn} />
+
+                </div>
+            )
+        }
+
+        function Header(props) {
+            return (
+                <div className='border border-4 border-primary d-flex flex-wrap justify-content-between p-3 m-2'>
+                    <h1>To Do App</h1>
+                    <div>
+                        <button onClick={()=>{props.filter('all')}} className='btn btn-primary'>All <span className='bg-danger p-1 rounded-circle'>0</span> </button>
+                        <button onClick={()=>{props.filter('completed')}} className='btn btn-primary m-1'>Completed <span className='bg-warning text-dark p-1 rounded-circle'>0</span> </button>
+                        <button onClick={()=>{props.filter('pending')}} className='btn btn-primary'>Pending <span className='bg-danger p-1 rounded-circle'>0</span></button>
+                    </div>
+                </div>
+            )
+        }
+
+        function Forminput(props) {
+            return (
+                <div className='border border-4 border-danger d-flex flex-wrap p-3 m-2 justify-content-between'>
+                    <input className='form-control w-75 form-float' type="text" name="" id="d1" placeholder='Add description...' />
+                    {!(props.x) && <button className='btn btn-success' onClick={() => { props.addToList() }}>Add to list</button>}
+                    {props.x && <button className='btn btn-primary' onClick={()=>{props.updatebtn()}}>Update</button>}
+                </div>
+            )
+        }
+
+        function Alltodo(props) {
+            return (
+                <div className='border border-4 border-secondary p-3 m-2'>
+                    {
+                        props.todoArr.map((todo,i) => {
+                            return (
+                                <Todo todo={todo.task} status={todo.status} delbtn={props.delbtn} i={i} donebtn={props.donebtn} undobtn={props.undobtn} editbtn={props.editbtn} />
+                            )
+                        })
+                    }
+                </div>
+            )
+        }
+
+        function Todo(props) {
+    
+            return (
+                <div >
+                    {
+                         <div className='border border-4 border-warning p-3 m-2'>
+                            <li className='d-flex flex-wrap justify-content-between'> 
+                                <div>
+                                    <span style={{textDecoration:(props.status)?('line-through'):('none'), color:(props.status)?('red'):('black')}}> {props.todo} </span>
+                                </div>
+                                <div>
+                                    {props.status && <button className='btn btn-danger m-1' onClick={() => { props.delbtn(props.i) }}>Delete</button>}
+                                    {!(props.status) && <button className='btn btn-warning m-1' onClick={()=>{props.donebtn(props.i)}}>Done</button>}
+                                    {props.status && <button className='btn btn-danger' onClick={()=>{props.undobtn(props.i)}}>Undo</button>}
+                                    {!(props.status) && <button className='btn btn-warning' onClick={()=>{props.editbtn(props.i)}}>Edit</button>}
+                                </div>
+                            </li>
+                        </div>
+                    }
+                </div>
+            )
+        }
+        ReactDOM.render(<Todolist />, document.getElementById('root'))
+    </script>
+
+</body>
+
+</html>
