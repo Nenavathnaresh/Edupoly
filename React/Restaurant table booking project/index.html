@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="table.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        function App() {
+            let [tables, setTables] = React.useState(Alltables);
+            let [selectedTable, setSelectedTable] = React.useState(null);
+
+            
+            // function selectTable(t){
+            //     setSelectedTable({...t})
+            // }
+
+            function bookTable() {
+                tables.map((table, i) => {
+                    if (table.id === selectedTable.id) {
+                        table.isOccupied = true
+                    }
+                    setTables([...tables])
+                })
+
+            }
+
+            function selectMenuItems(e) {
+
+                tables.map((table, i) => {
+                    if (table.id === selectedTable.id) {
+                        table.items.push({ ...e, count: 1 })
+                    }
+                    setTables([...tables])
+
+
+                })
+            }
+
+            function increment(e, i) {
+                tables.map((table) => {
+                    if (table.id === selectedTable.id) {
+                        if (e.target.id === 'incre') {
+                            table.items[i].count += 1;
+                        }
+                        if (e.target.id === "decre" && table.items[i].count > 1) {
+                            table.items[i].count -= 1;
+                        }
+                    }
+                    setTables([...tables])
+
+                })
+
+            }
+
+            function delbtn(e, i) {
+                if (confirm('Do you want to remove this item..?')) {
+                    tables.map((table) => {
+                        if (table.id === selectedTable.id) {
+                            table.items.splice(i, 1)
+                        }
+                        setTables([...tables])
+
+                    })
+                }
+            }
+
+            function cancelTable(){
+                tables.map((table, i) => {
+                    if (table.id === selectedTable.id) {
+                        table.isOccupied = false
+                    }
+                    setTables([...tables])
+                })
+
+            }
+
+            function checkOut(){
+                tables.map((table, i) => {
+                    if (table.id === selectedTable.id) {
+                        table.isOccupied = false
+                        table.previousBookings.push([...table.items]);
+                        table.items = []
+                    }
+                    setTables([...tables])
+                })
+            }
+
+            return (
+                <div className='border d-flex container mt-3'>
+                    <div className=' d-flex flex-wrap justify-content-between w-50' style={{height:'400px'}}>
+                        {
+                            tables.map((table) => {
+
+                                return (
+                                    <div onClick={() => { setSelectedTable(table) }} className=' p-3 w-25  m-1 text-center' style={{ border: (table.isOccupied) ? ('5px solid red') : ('5px solid blue') }}>
+                                        <Table table={table} />
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    <div className='border ms-5 m-2 w-50 p-3'>
+                        <Bill selectedTable={selectedTable} bookTable={bookTable} menuItems={menuItems} selectMenuItems={selectMenuItems} increment={increment} delbtn={delbtn} checkOut={checkOut} cancelTable={cancelTable} />
+                    </div>
+                </div>
+            )
+        }
+        ReactDOM.render(<App />, document.getElementById('root'))
+
+        function Table(props) {
+            return (
+                <div className=''>
+                    <h3>{props.table.id}</h3>
+                    <h6>Seats:{props.table.numOfSeats}</h6>
+                </div>
+            )
+        }
+
+        function Bill(props) {
+
+            return (
+                props.selectedTable && <div>
+
+                    <h5>Table Id :{props.selectedTable.id}</h5>
+                    <h5>Number of Seats :{props.selectedTable.numOfSeats}</h5>
+                    {!(props.selectedTable.isOccupied) && <button onClick={() => { props.bookTable() }} className='btn btn-warning w-25'>Book Table</button>}
+                    {(props.selectedTable.isOccupied) && <> <button className='btn btn-danger w-25 m-1'>Booked</button>
+                        <select onChange={(e) => { props.selectMenuItems(JSON.parse(e.target.value)) }} >
+
+                            <option value="" selected disabled >Please Select Food Items...</option>
+                            {
+                                props.menuItems.map((item) => {
+                                    return <option value={JSON.stringify(item)}>{item.name}</option>
+                                })
+                            }
+
+                        </select>
+
+                        <div>
+                            <table className='w-100 table table-hover'>
+                                <thead>
+                                    <tr>
+                                        <th>Name of Food</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        props.selectedTable.items.map((item, i) => {
+                                            return (
+                                                <tr>
+                                                    <td>{item.name}</td>
+                                                    <td>
+                                                        <button onClick={(e) => { props.increment(e, i) }} id='decre' className='rounded btn btn-light '>-</button>
+                                                        <span className='p-2'>{item.count}</span>
+                                                        <button onClick={(e) => { props.increment(e, i) }} id='incre' className='rounded btn btn-light '>+</button>
+                                                    </td>
+                                                    <td><i class="bi bi-currency-rupee"></i>{item.price}</td>
+                                                    <button className='btn btn-danger text-danger' onClick={(e) => { props.delbtn(e, i) }}>X</button>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><h3>Total Bill</h3></td>
+                                        <td><h3>{props.selectedTable.items.reduce((a, b) => {
+                                            return (a + b.count)
+                                        }, 0)}</h3></td>
+                                        <td><h3 className='bi bi-currency-rupee'>{props.selectedTable.items.reduce((a, b) => {
+                                            return (a + b.price * b.count)
+                                        }, 0)}</h3></td>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            {(props.selectedTable.items.length === 0) && <button className='btn btn-danger w-100' onClick={() => { props.cancelTable() }}>Cancel Table</button>}
+                            {(props.selectedTable.items.length > 0) &&<button className='btn btn-warning w-100' onClick={() => { props.checkOut() }}>Check Out</button>}
+                        </div>
+                    </>}
+
+                </div>
+            )
+        }
+    </script>
+</body>
+
+</html>
